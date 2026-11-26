@@ -21,3 +21,18 @@ Se omite una fotografia suelta sin referencia en el codigo. PHP 8.2 analiza
 193 de 194 scripts. lib/phpMailer/PHPMailer.php conserva el fallo de sintaxis
 de la copia desplegada, que declara un namespace despues de llamar a header.
 El envio de minutas utiliza class.phpmailer.php y class.smtp.php.
+
+## Guía del código fuente
+
+- [index.php](./index.php) es el punto de entrada web.
+- [vistas](./vistas) contiene la interfaz. [controller/route](./controller/route) contiene las rutas PHP de la aplicación.
+- [persistencia](./persistencia) y [model](./model) contienen el acceso a datos y los modelos.
+- [database_performance_indexes.sql](./database_performance_indexes.sql) contiene índices para una base compatible.
+
+### Verificación local
+
+Usa php -l para comprobar la sintaxis de los archivos que modifiques. Para cambios en la interfaz de rutas, ejecuta node --check assets/js/rutas/ruta.js. Las pruebas de correo y acceso a datos requieren una base y un servidor SMTP de prueba.
+
+### Referencia de producción
+
+La actualización más reciente observada en la revisión por FTPS fue la de vistas/layout/servicios/bitacora.php, el 23 de noviembre de 2026 a las 00:22:51, hora de Colombia. La copia de código de este repositorio se obtuvo el 26 de noviembre de 2026.
