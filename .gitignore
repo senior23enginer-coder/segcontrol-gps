@@ -1,0 +1,12 @@
+.env
+.env.*
+.ftpconfig
+ftp.txt
+*.log
+*.bak
+*.zip
+*.pdf
+/backup/
+/backups/
+/test/
+**/uploads/

@@ -1,0 +1,62 @@
+# Ajustes realizados
+
+- Se eliminaron salidas de debug visibles en pantalla como `admin`, `cliente`, rutas internas, `nada` y `var_dump`.
+- Se retiraron comentarios de debug y codigo comentado no necesario.
+- Se quitaron headers CORS dentro de vistas y DAO para evitar warnings de `headers already sent`.
+- Se dejo la visualizacion de errores desactivada en pantallas principales y el registro en log activado.
+- Se corrigio una validacion de usuario que podia generar accesos a indices inexistentes.
+- Se validaron archivos PHP propios con `php -l`.
+- Se mejoro el login para que los errores de acceso se muestren en un modal visual.
+- El backend de login ahora responde JSON limpio en vez de imprimir texto crudo en pantalla.
+- Se elimino el log de consola que mostraba usuario y clave durante el intento de acceso.
+- Se cambio el mensaje de aviso del panel principal por `Version 2.0 2026`.
+- Se agrego alerta de servicios vencidos con sonido, modal SweetAlert y notificacion del navegador.
+- Se mejoro el sonido de alerta de servicios vencidos con una secuencia de tonos mas distintiva.
+- Se mejoro visualmente el modal SweetAlert de servicios vencidos con estilo moderno, contador destacado y boton de accion mas claro.
+- Se blindo `mitabla.php` contra warnings de headers enviados despues de iniciar la salida HTML.
+- Se organizo la inicializacion de sesion en `vistas/helpers/sesionViewHelper.php` para reducir codigo duplicado y `if/else` anidados.
+- Se ajusto el boton de apagado del menu superior para cerrar sesion y devolver al login del mismo entorno.
+- Se reemplazaron imagenes externas rotas del panel de servicios por imagenes locales en `assets/images`.
+- Se agrego validacion de sesion para impedir acceso directo a `master.php` y `mitabla.php` sin autenticacion.
+- Se diferencio el error de login por base de datos no disponible para no mostrarlo como credenciales incorrectas.
+- Se habilito `SEGCONTROL_DB_HOST` para que Docker conecte al MySQL local de XAMPP por `host.docker.internal`, sin modificar usuario ni clave de BD.
+- Se cambio el enlace del panel flotante de servicios para usar ruta relativa al entorno actual y no el dominio remoto.
+- Se reemplazaron las imagenes del menu de servicios por iconos Material asociados a cada funcion.
+- Se corrigieron rutas remotas del flujo de servicios, bitacora, minutas y cierre de servicio para que apunten al entorno actual.
+- Se valido la carga local de `bitacora.php`, `nuevaMinuta.php` y el endpoint `cerrarServicio.php`.
+- Se corrigio la opcion de historial de servicios para enviar correctamente parametros Ajax, evitar short tags y cargar inicialmente los ultimos 100 servicios para mejorar tiempo de respuesta.
+- Se corrigio el modulo acompanante para eliminar includes remotos a `directorio.php`, usar `persistencia/acompananteDao.php` y rutas ASCII locales.
+- Se validaron `acompananteMain.php`, `nuevoAcompanante.php`, `verAcompanante.php` y endpoints de buscar/crear/editar acompanante sin warnings.
+- Se corrigio el modulo aseguradora para eliminar includes remotos a `directorio.php`, usar `persistencia/aseguradoraDao.php` y rutas relativas locales.
+- Se validaron `aseguradoraMain.php`, `nuevoAseguradora.php`, `verAseguradora.php` y endpoints de crear/editar aseguradora sin warnings.
+- Se reemplazaron las imagenes del panel de recursos e infraestructura por iconos Material para conductores, clientes y vehiculos.
+- Se corrigieron rutas remotas de clientes, conductores y vehiculos para que carguen relativas al entorno actual.
+- Se reemplazaron las imagenes del panel de administracion de usuarios por iconos Material para empleados y clientes.
+- Se corrigieron rutas remotas del modulo empleados para que carguen relativas al entorno actual.
+- Se elimino la opcion `Seguros Bolivar` del menu lateral de administrador.
+- Se validaron y corrigieron las rutas principales del menu lateral para que carguen rutas locales/relativas en cualquier entorno.
+- Se retiro el handler JavaScript obsoleto de `menuBolivar` para que no queden rutas antiguas asociadas a una opcion eliminada.
+- Se retiro `id` y `rol` de la URL principal: el login redirige a `master.php` y `master.php`/`mitabla.php` toman la identidad desde la sesion.
+- Se agrego limpieza automatica de URLs antiguas con parametros para redirigir a rutas sin datos sensibles visibles.
+- Se retiro el envio de `sesionHidden` desde JavaScript para creacion de servicios; el empleado se toma desde la sesion del servidor.
+- Se optimizo `DataSource.php` para reutilizar la conexion PDO durante cada request, cachear consultas repetidas y limpiar cache al ejecutar actualizaciones.
+- Se convirtieron rutas internas remotas restantes de `assets/js/rutas/ruta.js` a rutas relativas para evitar llamadas innecesarias al dominio publico.
+- Se elimino la carga duplicada de jQuery desde `vistas/footer.php`.
+- Se agrego `.htaccess` con compresion y cache de assets estaticos para Apache/shared hosting.
+- Se agrego `database_performance_indexes.sql` con indices recomendados para consultas frecuentes de servicios, novedades y aseguradoras.
+- Se aplicaron en la base local indices de rendimiento para `servicio`, `servicio_novedad` y `aseguradoras`.
+- Se retiraron includes remotos a `directorio.php` en endpoints activos de usuarios para evitar warnings y latencia.
+- Se validaron tiempos locales despues de optimizar: `master.php` ~0.09s, `administrador.php` ~0.06s, historial servicios ~0.23s, aseguradora ~0.05s, acompanante ~0.03s.
+- Se agrego acceso rapido desde el dashboard: click derecho sobre una fila de servicios activos muestra `Crear minuta` y carga la minuta en un modal sin salir del panel.
+- Se agrego boton superior para mostrar u ocultar el menu lateral, con estado persistente en el navegador.
+- Se mejoro la vista de bitacora del servicio con barra de acciones alineada, confirmacion SweetAlert antes de cerrar servicio y boton para previsualizar el PDF generado.
+- Se corrigio el guardado de evidencias de servicios/minutas para usar la ruta absoluta real `/public_html/app/servicios/{id}` y evitar warnings crudos por permisos o rutas relativas fragiles.
+- Se ajusto Docker local para montar `./servicios` en `/home/segcontr/public_html/app/servicios`, permitiendo validar evidencias localmente sin afectar la ruta del hosting.
+- Se amplio el menu contextual de servicios activos con `Ver servicio` y `Cerrar servicio`, reutilizando la confirmacion SweetAlert de cierre.
+- Se ajusto `Ver PDF` para generar `informe.pdf` bajo demanda si no existe, usando imagenes locales del servicio y permitiendo PDF aun cuando el servicio no tenga minutas registradas.
+- Se corrigio la creacion de minutas para validar la imagen antes de insertar, usar el id real insertado para nombrar el adjunto y no ocultar errores de carga en el frontend.
+- Se ajusto el PDF para regenerarse siempre al abrirlo, tomar las minutas actuales, usar imagenes locales y mejorar su presentacion visual empresarial.
+- Se aumento el limite local de subida en Docker a `16M`/`20M` para validar adjuntos sin afectar el hosting.
+- Se redisenio el PDF con estructura formal: encabezado empresarial, bloques de resumen, datos de servicio, evidencias en recuadros proporcionados, historial con tabla limpia y pie de confidencialidad.
+
+No se cambiaron credenciales ni se movieron configuraciones a `.env`.
