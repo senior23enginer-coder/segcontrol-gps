@@ -36,3 +36,16 @@ Usa php -l para comprobar la sintaxis de los archivos que modifiques. Para cambi
 ### Referencia de producción
 
 La actualización más reciente observada en la revisión por FTPS fue la de vistas/layout/servicios/bitacora.php, el 23 de noviembre de 2026 a las 00:22:51, hora de Colombia. La copia de código de este repositorio se obtuvo el 26 de noviembre de 2026.
+
+<!-- station-x-repository-guide:start -->
+
+## Guía de esta copia
+
+### Recorrido de la aplicación
+[index.php](./index.php) inicia la aplicación. [vistas](./vistas) contiene la interfaz, [controller](./controller) los controladores y rutas, [model](./model) los modelos y [persistencia](./persistencia) el acceso a datos. [assets](./assets) reúne recursos web. [AJUSTES_REALIZADOS.md](./AJUSTES_REALIZADOS.md) conserva las notas técnicas de la copia.
+### Entorno y verificación
+Prepara una base compatible para pruebas y configura las variables de base de datos y SMTP descritas arriba. Para comprobar una minuta, usa datos ficticios, valida el registro en bitácora y prueba envío o reenvío con un SMTP de prueba. Comprueba los archivos PHP modificados con `php -l` y JavaScript con `node --check`.
+### Procedencia de la versión
+La copia se obtuvo desde producción por FTPS en modo de lectura. Revisa la sección de producción del README para la fecha observada y el alcance de la comprobación. [database_performance_indexes.sql](./database_performance_indexes.sql) contiene índices para un esquema ya compatible.
+
+<!-- station-x-repository-guide:end -->
